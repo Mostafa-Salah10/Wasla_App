@@ -6,8 +6,10 @@ class RestaurantCartModel {
   final String imageUrl;
   int quantity;
   double totalPrice;
+  final bool isAvailable;
 
   RestaurantCartModel({
+    required this.isAvailable,
     required this.cartItemId,
     required this.menuItemId,
     required this.menuItemName,
@@ -26,6 +28,7 @@ class RestaurantCartModel {
       imageUrl: json['imageUrl'],
       quantity: json['quantity'],
       totalPrice: (json['totalPrice'] as num).toDouble(),
+      isAvailable: json['isAvailable'],
     );
   }
 }

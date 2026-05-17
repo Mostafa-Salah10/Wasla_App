@@ -5,7 +5,8 @@ abstract class ApiEndPoints {
   static const String register = 'api/Account/register';
   static const String login = 'api/Account/login';
   static const String resetPasswordForProfile = 'api/Account/change-password';
-  static const String updateRestaurantReservation = 'api/Reservation/reservation';
+  static const String updateRestaurantReservation =
+      'api/Reservation/reservation';
   static const String forgotPassCheckEmail =
       'api/Account/check-mail-verification';
   static const String verifyEmail = 'api/Account/verify-email';
@@ -154,6 +155,7 @@ abstract class ApiEndPoints {
   static const String getOrdersForRestaruant =
       'api/RestaurantOrder/orders-restaurant';
   static const String getRestaurantChart = 'api/Restaurant/Charts';
+  static const String getRestaurantMenu = '/api/RestaurantMenu/Items';
   static const String addMenuToCart = 'api/RestaurantOrder/add-to-cart';
   static const String getResidentCartWithRestaurant =
       'api/RestaurantOrder/cart-items';

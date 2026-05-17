@@ -31,7 +31,10 @@
         "noBack":"لا، رجوع",
 
       "signIn": "تسجيل الدخول",
+      "notAvailableItem":"غير متاح",
               "selectDriver": "اختر سائق",
+                "notAvailable":"المطعم غير متاح الان",
+
 
       "signUp": "إنشاء حساب",
               "noDrivers": "لا يوجد سائقين متاحين حولك",

@@ -34,7 +34,7 @@ class RestaurantCartListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CartCategoryPill(label: item.menuItemCategoryName),
+                  CartCategoryPill(isAvailable: item.isAvailable),
                   const SizedBox(height: 4),
                   Text(
                     item.menuItemName,

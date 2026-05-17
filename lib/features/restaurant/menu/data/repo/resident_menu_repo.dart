@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_menu_category_model.dart';
+import 'package:wasla/features/restaurant/menu/data/models/restaurant_menu_model.dart';
 
 abstract class ResidentMenuRepo {
   Future<Either<Failure, List<RestaurantMenuCategoryModel>>> getMenuCategories({
@@ -11,6 +12,11 @@ abstract class ResidentMenuRepo {
   });
   Future<Either<Failure, List<RestauarantMenuItemModel>>> getMenuItems({
     required String restaurantId,
+  });
+  Future<Either<Failure, List<RestaurantMenuModel>>> getRestaurantMenu({
+    required String restaurantId,
+    required int pageNumber,
+    required int pageSize,
   });
   Future<Either<String, Null>> addMenu({
     required String restaurantId,

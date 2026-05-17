@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
 class CartCategoryPill extends StatelessWidget {
-  const CartCategoryPill({super.key, required this.label});
+  const CartCategoryPill({super.key, required this.isAvailable});
 
-  final String label;
+  final bool isAvailable;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class CartCategoryPill extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        label,
+        isAvailable ? 'available'.tr(context) : 'unAvailable'.tr(context),
         style: Theme.of(context).textTheme.labelSmall!.copyWith(
           color: AppColors.primaryColor,
           fontWeight: FontWeight.w400,

@@ -11,6 +11,7 @@ import 'package:wasla/core/functions/convert_image_to_json.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restauarant_menu_item_model.dart';
 import 'package:wasla/features/resident_service/features/restaurant/data/models/restaurant_menu_category_model.dart';
+import 'package:wasla/features/restaurant/menu/data/models/restaurant_menu_model.dart';
 import 'package:wasla/features/restaurant/menu/data/repo/resident_menu_repo.dart';
 
 class ResidentMenuRepoImpl extends ResidentMenuRepo {
@@ -181,6 +182,38 @@ class ResidentMenuRepoImpl extends ResidentMenuRepo {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
       return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<RestaurantMenuModel>>> getRestaurantMenu({
+    required String restaurantId,
+    required int pageNumber,
+    required int pageSize,
+  }) async {
+    try {
+      if (!await sl<NetworkInfo>().isConnected) {
+        return Left(NoInternetFailure());
+      }
+
+      final response = await api.get(
+        ApiEndPoints.getRestaurantMenu,
+        queryParameters: {
+          ApiKeys.id: restaurantId,
+          ApiKeys.pageNumberCap: pageNumber,
+          ApiKeys.pageSizeCap: pageSize,
+        },
+      );
+
+      List<RestaurantMenuModel> items = [];
+      for (var category in response[ApiKeys.data][ApiKeys.data] ?? []) {
+        items.add(RestaurantMenuModel.fromJson(category));
+      }
+      return Right(items);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.errorMessage));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

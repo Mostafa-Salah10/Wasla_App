@@ -61,7 +61,6 @@ class RestaurantMenuItemCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Image Section ──
             Expanded(
               flex: 3,
               child: Stack(
@@ -71,7 +70,6 @@ class RestaurantMenuItemCard extends StatelessWidget {
                     imageUrl: item.imageUrl,
                     fit: BoxFit.cover,
                   ),
-                  // Availability badge
                   Positioned(
                     top: 8,
                     left: 8,
@@ -87,7 +85,6 @@ class RestaurantMenuItemCard extends StatelessWidget {
                           : const Color(0xFFFAECE7),
                     ),
                   ),
-                  // Prep time badge
                   Positioned(
                     bottom: 8,
                     right: 8,

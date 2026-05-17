@@ -73,7 +73,8 @@ class _RestaurantMenuCatgoryListState extends State<RestaurantMenuCatgoryList> {
           itemBuilder: (context, index) => RestaurantMenuItemCard(
             restaurantId: widget.restaurantId,
             item: items.elementAt(index),
-            showOrderButton: widget.showOrderButton,
+            showOrderButton:
+                widget.showOrderButton && items.elementAt(index).isAvailable,
           ),
         );
       },

@@ -37,7 +37,9 @@ class RestaurantCartRepoImpl extends RestaurantCartRepo {
 
       List<RestaurantCartModel> items = [];
       for (var item in response[ApiKeys.data]) {
-        items.add(RestaurantCartModel.fromJson(item));
+        if (!item['isDeleted']) {
+          items.add(RestaurantCartModel.fromJson(item));
+        }
       }
       return Right(items);
     } on ServerException catch (e) {
@@ -107,7 +109,7 @@ class RestaurantCartRepoImpl extends RestaurantCartRepo {
           ApiKeys.restaurantId: restaurantId,
           ApiKeys.address: address,
           ApiKeys.notes: notes,
-          ApiKeys.paymentMethod: paymentMethod.index +1,
+          ApiKeys.paymentMethod: paymentMethod.index + 1,
         },
       );
 
