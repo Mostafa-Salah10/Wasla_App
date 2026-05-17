@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
@@ -88,28 +89,31 @@ class BottomSheetLogoutWidget extends StatelessWidget {
             builder: (acceptContext, state) {
               return GeneralButton(
                 onPressed: () async {
-                  // context.read<AuthCubit>().logOut();
+                  final router = GoRouter.of(context);
+                  final driverTripCubit = context.read<DriverTripCubit>();
+
                   acceptContext.popScreen();
+
                   final String? userId = await getUserId();
                   final String? role =
                       SharedPreferencesHelper.get(key: ApiKeys.role) as String?;
 
                   if (role == ServiceRole.driver.name) {
-                    context.read<DriverTripCubit>().stopDriverLocationTimer(
-                      driverId: userId!,
-                    );
+                    driverTripCubit.stopDriverLocationTimer(driverId: userId!);
                   }
 
                   FcmNotifications.unsubscribeFromTopic('User_$userId');
                   FcmNotifications.unsubscribeFromTopic('All');
 
                   resetDataInSpecificRole(context);
-                  SharedPreferencesHelper.removeKeys(
+
+                  await SharedPreferencesHelper.removeKeys(
                     keys: [ApiKeys.role, AppStrings.isSingedIn],
-                  ).then((val) {
-                    SecureStorageHelper.clear();
-                    context.pushAndRemoveAllScreens(AppRoutes.signInScreen);
-                  });
+                  );
+
+                  await SecureStorageHelper.clear();
+
+                  router.go(AppRoutes.signInScreen);
                 },
                 text: "yes_logout".tr(context),
                 height: 45,

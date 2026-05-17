@@ -24,4 +24,5 @@ abstract class DriverTripRepo {
     required String driverId,
   });
   Future<Either<Failure, TripModel>> getTripDetails({required int tripId});
+  Future<Either<String, int?>> isInRide({required String driverId});
 }

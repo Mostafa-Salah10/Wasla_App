@@ -72,6 +72,11 @@ class _ResidentTripData extends StatelessWidget {
             buildWhen: (previous, current) =>
                 current is ResidentDriverArrivedState,
             builder: (context, state) {
+
+              // final cubit=context.read<ResidentDriverCubit>();
+              // cubit.fromPlace.lat=trip.!;
+              // cubit.fromPlace.lng=trip.pickupLongitude!;
+          
               return ShowDriverTrackTile(
                 showMap: !context.read<ResidentDriverCubit>().isDriverArrived,
                 title: 'showDriverLocation',

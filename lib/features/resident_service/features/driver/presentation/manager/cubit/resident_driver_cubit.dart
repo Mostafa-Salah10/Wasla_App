@@ -10,6 +10,7 @@ import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/maps/map_services.dart';
 import 'package:wasla/core/service/maps/models/places_model.dart';
 import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
+import 'package:wasla/features/resident_service/features/driver/data/models/choose_driver_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/repo/residnet_driver_repo.dart';
 
@@ -31,12 +32,16 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
   double lng = 31.2357;
   LatLng driverLocation = LatLng(30.109760, 31.247240);
   List<LatLng> routePoints = [];
+
+  List<ChooseDriverModel> selectedDrivers = [];
   int routeIndex = 0;
   Timer? driverTimer;
   double driverRotation = 0.0;
   int selecedRouteIndex = -1;
   final mapController = MapController();
   int tripId = -1;
+
+  int isInRideId = -1;
   bool isPopFromButton = false;
 
   Timer? cancelTripTimer;
@@ -101,14 +106,13 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
 
   void getMyLocation() async {
     emit(ResidentDriverGetMyLocationLoadingState());
-    Future.delayed(const Duration(seconds: 2), () async {
-      final result = await MapServices.getCurrentLocation();
-      result.fold((error) {}, (success) {
-        myLocation = success;
-        lat = myLocation!.latitude!;
-        lng = myLocation!.longitude!;
-        emit(ResidentDriverGetMyLocationSuccessState());
-      });
+
+    final result = await MapServices.getCurrentLocation();
+    result.fold((error) {}, (success) {
+      myLocation = success;
+      lat = myLocation!.latitude!;
+      lng = myLocation!.longitude!;
+      emit(ResidentDriverGetMyLocationSuccessState());
     });
   }
 
@@ -240,7 +244,8 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
         emit(ResidentDriverRequestRideFailure(errorMessage: error));
       },
       (success) {
-        tripId = success;
+        // tripId = success;
+        selectedDrivers = success;
         emit(ResidentDriverRequestRideSuccess());
       },
     );
@@ -297,6 +302,52 @@ class ResidentDriverCubit extends Cubit<ResidentDriverState> {
       },
       (success) {
         emit(ResidentAddRatingSuccess());
+      },
+    );
+  }
+
+  Future<void> chooseDriver({required String driverId}) async {
+    final String? userId = await getUserId();
+    emit(ResidentChooseDriverLoading(driverId: driverId));
+    final result = await residnetDriverRepo.chooseDriver(
+      driverId: driverId,
+      vehicleType: vehicleType.index,
+      passengerId: userId!,
+      pickupLatitude: fromPlace!.lat,
+      pickupLongitude: fromPlace!.lng,
+      dropoffLatitude: toPlace!.lat,
+      dropoffLongitude: toPlace!.lng,
+      pickUpPlace: fromPlace!.name,
+      dropOffPlace: toPlace!.name,
+    );
+    result.fold(
+      (error) {
+        emit(
+          ResidentChooseDriverFailure(errorMessage: error, driverId: driverId),
+        );
+      },
+      (success) {
+        tripId = success;
+        emit(ResidentChooseDriverSuccess(driverId: driverId));
+      },
+    );
+  }
+
+  Future<bool> isInRide() async {
+    final String? userId = await getUserId();
+
+    final result = await residnetDriverRepo.isInRide(passengerId: userId!);
+
+    return result.fold(
+      (error) {
+        return false;
+      },
+      (success) {
+        if (success != null) {
+          tripId = success;
+          return true;
+        }
+        return false;
       },
     );
   }

@@ -64,7 +64,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
     required String driverId,
   }) async {
     try {
-      await api.put(
+      await api.post(
         ApiEndPoints.acceptTrip + id.toString(),
         queryParameters: {ApiKeys.driverId: driverId},
       );
@@ -136,6 +136,23 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Left(ServerFailure(e.errorModel.errorMessage));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
+    }
+  }
+
+
+  @override
+  Future<Either<String, int?>> isInRide({required String driverId}) async {
+    try {
+      final response = await api.get(
+        ApiEndPoints.isInRide,
+        queryParameters: {ApiKeys.userId: driverId},
+      );
+
+      return Right(response[ApiKeys.data]);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

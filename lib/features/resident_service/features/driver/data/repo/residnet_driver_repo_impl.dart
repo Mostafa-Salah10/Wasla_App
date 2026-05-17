@@ -11,6 +11,7 @@ import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
 import 'package:wasla/core/service/service_locator.dart';
 import 'package:wasla/features/driver/features/home/data/models/driver_profile_model.dart';
+import 'package:wasla/features/resident_service/features/driver/data/models/choose_driver_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/models/resident_trip_model.dart';
 import 'package:wasla/features/resident_service/features/driver/data/repo/residnet_driver_repo.dart';
 
@@ -68,7 +69,7 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
   }
 
   @override
-  Future<Either<String, int>> searchToRide({
+  Future<Either<String, List<ChooseDriverModel>>> searchToRide({
     required String passengerId,
     required double pickupLatitude,
     required double pickupLongitude,
@@ -92,8 +93,14 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
           ApiKeys.vehicleType: vehicleType,
         },
       );
-      log("Trip Id : ${response[ApiKeys.data]}");
-      return Right(response[ApiKeys.data]);
+      // log("Trip  : $response");
+
+      List<ChooseDriverModel> drivers = [];
+      for (var driver in response) {
+        drivers.add(ChooseDriverModel.fromJson(driver));
+      }
+
+      return Right(drivers);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {
@@ -182,6 +189,59 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
         },
       );
       return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, int>> chooseDriver({
+    required String driverId,
+    required String passengerId,
+    required double pickupLatitude,
+    required double pickupLongitude,
+    required double dropoffLatitude,
+    required double dropoffLongitude,
+    required String pickUpPlace,
+    required String dropOffPlace,
+    required int vehicleType,
+  }) async {
+    try {
+      final response = await api.post(
+        ApiEndPoints.chooseDriver,
+        body: {
+          ApiKeys.passengerId: passengerId,
+          ApiKeys.driverId: driverId,
+          ApiKeys.pickupLatitude: pickupLatitude,
+          ApiKeys.pickupLongitude: pickupLongitude,
+          ApiKeys.dropoffLatitude: dropoffLatitude,
+          ApiKeys.dropoffLongitude: dropoffLongitude,
+          ApiKeys.pickUpPlace: pickUpPlace,
+          ApiKeys.dropOffPlace: dropOffPlace,
+          ApiKeys.vehicleType: vehicleType,
+        },
+      );
+      log("Trip  Id : $response");
+
+      return Right(response);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, int?>> isInRide({required String passengerId}) async {
+    try {
+      final response = await api.get(
+        ApiEndPoints.isInRide,
+        queryParameters: {ApiKeys.userId: passengerId},
+      );
+
+      return Right(response[ApiKeys.data]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     } catch (e) {

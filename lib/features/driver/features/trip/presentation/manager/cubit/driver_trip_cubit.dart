@@ -210,6 +210,25 @@ class DriverTripCubit extends Cubit<DriverTripState> {
     );
   }
 
+  Future<bool> isInRide() async {
+    final String? userId = await getUserId();
+
+    final result = await driverTripRepo.isInRide(driverId: userId!);
+
+    return result.fold(
+      (error) {
+        return false;
+      },
+      (success) {
+        if (success != null) {
+          tripId = success;
+          return true;
+        }
+        return false;
+      },
+    );
+  }
+
   Future<void> acceptRide() async {
     final String? driverId = await getUserId();
     emit(DriverAcceptRideLoading());

@@ -74,3 +74,24 @@ class ResidentDriverProfileSuccess extends ResidentDriverState {
 
   ResidentDriverProfileSuccess({required this.driver});
 }
+
+////choose driver states
+
+abstract class ResidentChooseDriverState extends ResidentDriverState {
+  final String driverId;
+
+  ResidentChooseDriverState({required this.driverId});
+}
+
+class ResidentChooseDriverLoading extends ResidentChooseDriverState {
+  ResidentChooseDriverLoading({required super.driverId});
+}
+
+class ResidentChooseDriverSuccess extends ResidentChooseDriverState {
+  ResidentChooseDriverSuccess({required super.driverId});
+}
+
+class ResidentChooseDriverFailure extends ResidentChooseDriverState {
+  final String errorMessage;
+  ResidentChooseDriverFailure( { required this.errorMessage, required super.driverId});
+}

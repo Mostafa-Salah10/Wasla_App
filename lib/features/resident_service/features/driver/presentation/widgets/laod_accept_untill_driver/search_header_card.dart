@@ -35,7 +35,7 @@ class SearchHeaderCard extends StatelessWidget {
             const SizedBox(height: 20),
 
             Text(
-              'searchDrivers'.tr(context),
+              'waitingDriver'.tr(context),
               style: Theme.of(context).textTheme.displayMedium,
             ),
 

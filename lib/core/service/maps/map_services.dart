@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math' as Math;
 
 import 'package:dartz/dartz.dart';
@@ -6,9 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/maps/models/places_model.dart';
-import 'package:wasla/core/utils/app_colors.dart';
 
 abstract class MapServices {
   static final Dio dio = Dio();
@@ -53,27 +50,26 @@ abstract class MapServices {
   }
 
   static Future<List<PlaceModel>> searchPlaces(String query) async {
-    if (query.isEmpty) return [];
-    try {
-      final response = await dio.get(
-        'https://photon.komoot.io/api/',
-        queryParameters: {'q': query, 'limit': 5},
-        options: Options(
-          headers: {
-            "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-          },
-        ),
-      );
+  if (query.trim().isEmpty) return [];
 
-      return (response.data['features'] as List)
-          .map((e) => PlaceModel.fromJson(e))
-          .toList();
-    } catch (e) {
-      toastAlert(color: AppColors.red, msg: e.toString());
-      return [];
-    }
+  try {
+    final response = await dio.get(
+      'https://api.geoapify.com/v1/geocode/autocomplete',
+      queryParameters: {
+        'text': query,
+        'limit': 5,
+        'apiKey': '8a39a2db214a422cac8b556e3adbda20',
+      },
+    );
+
+    return (response.data['features'] as List)
+        .map((e) => PlaceModel.fromGeoapify(e))
+        .toList();
+  } catch (e) {
+    print(e.toString());
+    return [];
   }
+}
 
   static Future<List<LatLng>> getBestRoute({
     required LatLng start,

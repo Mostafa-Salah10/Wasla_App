@@ -93,6 +93,8 @@ abstract class ApiEndPoints {
   static const String getProfileForSpecificChat = 'api/Chats/UserProfile';
   static const String chatReadMsgs = 'api/Chats/MarkAsRead/';
   static const String searchToRide = 'api/Ride/request';
+  static const String chooseDriver = 'api/Ride/choose-driver';
+  static const String isInRide = 'api/Ride/IsInRide';
   static const String getDetailsForRider = 'api/Ride/GetrideDetailsForRider/';
   static const String cancelRide = 'api/Ride/cancel/';
   static const String getDriverLocation = 'api/Driver/GetDriverLocation';

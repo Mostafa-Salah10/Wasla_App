@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/enums/driver_status.dart';
+import 'package:wasla/core/functions/toast_alert.dart';
+import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/widgets/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:wasla/core/widgets/custom_bottom_sheet_confirm_widget.dart';
 import 'package:wasla/features/chat/presentation/views/last_users_viwe.dart';
 import 'package:wasla/features/driver/features/booking/presentation/views/driver_bookings_view.dart';
 import 'package:wasla/features/driver/features/home/presentation/manager/cubit/driver_cubit.dart';
@@ -38,7 +43,51 @@ class _DriverBottomNavBarState extends State<DriverBottomNavBar> {
         changeMyStatus(DriverStatus.offline);
       },
     );
+
+    checkIsInRide();
     super.initState();
+  }
+
+  void checkIsInRide() async {
+    final cubit = context.read<DriverTripCubit>();
+    final bool isInRide = await cubit.isInRide();
+
+    if (isInRide) {
+      showModalBottomSheet(
+        isDismissible: false,
+        context: context,
+        builder: (bottomSheetContext) {
+          return CustomBottomSheetConfirmWidget(
+            cancelText: 'noBack'.tr(context),
+            confirmText: 'yesCancel'.tr(context),
+            onCancel: () {
+              context.push(
+                AppRoutes.residentTripInfoScreen,
+                extra: cubit.tripId,
+              );
+              Navigator.pop(bottomSheetContext);
+            },
+            onConfirm: () async {
+              Navigator.pop(bottomSheetContext);
+              await cubit.cancelRide();
+              if (cubit.state is DriverCancelRideSuccess) {
+                toastAlert(
+                  color: AppColors.primaryColor,
+                  msg: 'tripCancelled'.tr(context),
+                );
+              } else if (cubit.state is DriverCancelRideFailure) {
+                toastAlert(
+                  color: AppColors.error,
+                  msg: 'somethingWentWrong'.tr(context),
+                );
+              }
+            },
+            title: 'cancelRide'.tr(context),
+            description: 'cancelRideDesc'.tr(context),
+          );
+        },
+      );
+    }
   }
 
   @override

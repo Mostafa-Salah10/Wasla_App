@@ -112,4 +112,5 @@ abstract class AppRoutes {
   static const String helpCenterScreen = '/helpCenterScreen';
   static const String allBannarsScreen = '/allBannarsScreen';
   static const String restaurantProfileScreen = '/restaurantProfileScreen';
+  static const String chooseDriverScreen = '/chooseDriverScreen';
 }

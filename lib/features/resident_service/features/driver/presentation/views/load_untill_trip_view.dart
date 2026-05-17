@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/custom_bottom_sheet_confirm_widget.dart';
@@ -44,8 +46,8 @@ class _LoadUntillTripViewState extends State<LoadUntillTripView> {
                     Navigator.pop(bottomSheetContext);
                     context.read<ResidentDriverCubit>().cancelRide();
                   },
-                  title: 'cancelSearching'.tr(context),
-                  description: 'cancelSearchingDsc'.tr(context),
+                  title: 'cancelWaiting'.tr(context),
+                  description: 'cancelWaitingDesc'.tr(context),
                 );
               },
             );
@@ -102,8 +104,7 @@ class CancelDriverButton extends StatelessWidget {
             context.pop();
           } else {
             context.pop();
-            context.pop();
-            context.pop();
+            context.pushAndRemoveAllScreens(AppRoutes.residenBottomNavBar);
           }
         }
         if (state is ResidentDriverCancelRideFailure) {

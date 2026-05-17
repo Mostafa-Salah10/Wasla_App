@@ -36,11 +36,11 @@ class _TripCancelledScreenState extends State<TripCancelledScreen> {
                 context.pop();
               } else {
                 if (widget.isDriver) {
-                  context.pushReplacementScreen(
+                  context.pushAndRemoveAllScreens(
                     AppRoutes.driverBottomNavBarScreen,
                   );
                 } else {
-                  context.pushReplacementScreen(AppRoutes.residenBottomNavBar);
+                  context.pushAndRemoveAllScreens(AppRoutes.residenBottomNavBar);
                 }
               }
             }
@@ -101,11 +101,11 @@ class _TripCancelledScreenState extends State<TripCancelledScreen> {
                 GeneralButton(
                   onPressed: () {
                     if (widget.isDriver) {
-                      context.pushReplacementScreen(
+                      context.pushAndRemoveAllScreens(
                         AppRoutes.driverBottomNavBarScreen,
                       );
                     } else {
-                      context.pushReplacementScreen(
+                      context.pushAndRemoveAllScreens(
                         AppRoutes.residenBottomNavBar,
                       );
                     }

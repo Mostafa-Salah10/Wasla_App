@@ -13,6 +13,7 @@ import 'package:wasla/features/profile/presentation/views/restaurant_edit_profil
 import 'package:wasla/features/profile/presentation/views/restaurant_profile_info.dart';
 import 'package:wasla/features/profile/presentation/views/technician_edit_profile.dart';
 import 'package:wasla/features/profile/presentation/views/technician_profile_info.dart';
+import 'package:wasla/features/resident_service/features/driver/presentation/views/choose_driver_view.dart';
 import 'package:wasla/features/resident_service/features/gym/data/repo/gym_resident_repo_impl.dart';
 import 'package:wasla/features/resident_service/features/gym/presentation/manager/cubit/gym_resident_cubit.dart';
 import 'package:wasla/features/resident_service/features/home/presentation/views/all_bannars_view.dart';
@@ -523,6 +524,12 @@ final GoRouter appRouter = GoRouter(
       },
     ),
     GoRoute(
+      path: AppRoutes.chooseDriverScreen,
+      builder: (context, state) {
+        return ChooseDriverView();
+      },
+    ),
+    GoRoute(
       path: AppRoutes.driverProfileInfoScreen,
       builder: (context, state) {
         final DriverProfileModel driverProfileModel =
@@ -658,7 +665,8 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.updateReservationScreen,
       builder: (context, state) {
-        final reservationModel = state.extra as UpdateRestaurantReservationModel;
+        final reservationModel =
+            state.extra as UpdateRestaurantReservationModel;
         return BlocProvider(
           create: (context) => ResidentRestaurantCubit(
             ResidentRestaurantRepoImpl(api: sl<ApiConsumer>()),

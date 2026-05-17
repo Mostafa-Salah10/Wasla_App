@@ -1,8 +1,8 @@
 class PlaceModel {
-   String name;
-   String country;
-   double lat;
-   double lng;
+  String name;
+  String country;
+  double lat;
+  double lng;
 
   PlaceModel({
     required this.name,
@@ -11,15 +11,14 @@ class PlaceModel {
     required this.lng,
   });
 
-  factory PlaceModel.fromJson(Map<String, dynamic> json) {
-    final properties = json['properties'];
-    final coordinates = json['geometry']['coordinates'];
-    return PlaceModel(
-      name: properties['name'] ?? '',
-      country: properties['country'] ?? '',
-      lat: coordinates[1],
-      lng: coordinates[0],
-    );
-  }
-}
+  factory PlaceModel.fromGeoapify(Map<String, dynamic> json) {
+  final props = json['properties'];
 
+  return PlaceModel(
+    name: props['formatted'] ?? '',
+    country: props['country'] ?? '',
+    lat: props['lat'] ?? 0.0,
+    lng: props['lon'] ?? 0.0,
+  );
+}
+}

@@ -30,7 +30,7 @@ class EnterLocationBody extends StatelessWidget {
               toastAlert(color: AppColors.error, msg: state.errorMessage);
             }
             if (state is ResidentDriverRequestRideSuccess) {
-              context.pushScreen(AppRoutes.loadUntillTripScreen);
+              context.pushScreen(AppRoutes.chooseDriverScreen);
             }
           },
           buildWhen: (previous, current) =>

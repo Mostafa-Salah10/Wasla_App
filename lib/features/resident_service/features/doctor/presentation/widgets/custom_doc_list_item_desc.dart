@@ -36,10 +36,9 @@ class ServiceItemDescription extends StatelessWidget {
           subtitle,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context)
-              .textTheme
-              .labelSmall!
-              .copyWith(color: AppColors.gray),
+          style: Theme.of(
+            context,
+          ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
         ),
         const SizedBox(height: 10),
         ReviewPart(rating: rating),
@@ -60,16 +59,14 @@ class ReviewPart extends StatelessWidget {
         const SizedBox(width: 6),
         Text(
           '${rating.toStringAsFixed(1)}  reviews',
-          style: Theme.of(context)
-              .textTheme
-              .labelSmall!
-              .copyWith(color: AppColors.gray),
+          style: Theme.of(
+            context,
+          ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
         ),
       ],
     );
   }
 }
-
 
 class TitleWithFavouriteWidget extends StatelessWidget {
   const TitleWithFavouriteWidget({
@@ -95,10 +92,9 @@ class TitleWithFavouriteWidget extends StatelessWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context)
-                .textTheme
-                .displaySmall!
-                .copyWith(fontWeight: FontWeight.w700),
+            style: Theme.of(
+              context,
+            ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         if (showFavourite) ...[
@@ -119,6 +115,31 @@ class TitleWithFavouriteWidget extends StatelessWidget {
   }
 }
 
+class TitleWithWidget extends StatelessWidget {
+  const TitleWithWidget({super.key, required this.title, required this.widget});
 
+  final String title;
 
+  final Widget widget;
 
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(
+              context,
+            ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ),
+        const SizedBox(width: 10),
+        widget
+      ],
+    );
+  }
+}

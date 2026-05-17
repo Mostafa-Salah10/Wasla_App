@@ -31,8 +31,8 @@ class _DriverTripDetailsViewState extends State<DriverTripDetailsView> {
         child: BlocStatusHandler<ResidentDriverCubit, ResidentDriverState>(
           body: const DriverTripDetailsViewBody(),
           onRetry: () {
-            getDetails();
             context.read<ResidentDriverCubit>().onRetry();
+            getDetails();
           },
           isNetwork: (state) => state is ResidentDriverNetworkState,
           isError: (state) => state is ResidentDriverFailureState,
