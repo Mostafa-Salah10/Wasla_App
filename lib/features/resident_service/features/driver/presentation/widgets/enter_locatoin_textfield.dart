@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 
 class EnterLocationTextField extends StatelessWidget {
   const EnterLocationTextField({
@@ -24,7 +25,9 @@ class EnterLocationTextField extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.grey.shade300,
+        fillColor: context.isDarkMode
+            ? Colors.grey.shade800
+            : Colors.grey.shade200,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
           borderSide: BorderSide.none,

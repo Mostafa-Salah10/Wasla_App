@@ -58,7 +58,7 @@ class MenuHub {
   void addListeners() {
     /// Menu Item Status Changed
     hubConnection.on('MenuItemStatusChanged', (args) {
-      log('Hello');
+      log('Status Changed Fired');
       if (args != null && args.isNotEmpty) {
         // final data = args[0] as Map;
 

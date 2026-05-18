@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
@@ -40,7 +41,9 @@ class EnterYourLocationSimulateWidget extends StatelessWidget {
                       context.pushScreen(AppRoutes.enterYourLocationScreen),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.grey.shade200,
+                    fillColor: context.isDarkMode
+                        ? Colors.grey.shade800
+                        : Colors.grey.shade200,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
