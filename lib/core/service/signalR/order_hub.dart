@@ -4,11 +4,11 @@ import 'package:wasla/core/database/cache/secure_storage_helper.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
-class RestaurantHub {
+class OrderHub {
   late HubConnection hubConnection;
   final void Function(int orderId, int status)? onOrderStatusChanged;
 
-  RestaurantHub({required this.onOrderStatusChanged});
+  OrderHub({required this.onOrderStatusChanged});
 
   Future<void> init() async {
     hubConnection = HubConnectionBuilder()

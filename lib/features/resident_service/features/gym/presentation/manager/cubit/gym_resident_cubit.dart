@@ -115,7 +115,7 @@ class GymResidentCubit extends Cubit<GymResidentState> {
       gymId: gymId,
       serviceId: bookingId,
       residentId: residentId!,
-      isPaymentOnline: true,
+      isPaymentOnline: paymentMethod == PaymentMethod.creditCard,
     );
     result.fold(
       (error) {
