@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/connection/network_info.dart';
@@ -88,6 +87,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
           ApiKeys.driverId: driverId,
           ApiKeys.latitudeSmall: location.latitude,
           ApiKeys.longitudeSmall: location.longitude,
+          "vehicleType": 0,
         },
       );
       return Right(null);
@@ -138,7 +138,6 @@ class DriverTripRepoImpl extends DriverTripRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
-
 
   @override
   Future<Either<String, int?>> isInRide({required String driverId}) async {

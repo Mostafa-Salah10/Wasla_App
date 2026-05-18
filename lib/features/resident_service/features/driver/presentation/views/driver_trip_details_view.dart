@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
+import 'package:wasla/core/service/maps/models/places_model.dart';
 import 'package:wasla/core/widgets/bloc_status_handler.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/widgets/trip_details/trip_details_body.dart';
@@ -45,9 +47,23 @@ class _DriverTripDetailsViewState extends State<DriverTripDetailsView> {
     );
   }
 
-  void getDetails() {
+  void getDetails() async {
     final cubit = context.read<ResidentDriverCubit>();
     cubit.tripId = widget.tripId;
-    cubit.getTripForResident();
+    await cubit.getTripForResident();
+    if (cubit.fromPlace == null || cubit.toPlace == null) {
+      cubit.fromPlace = PlaceModel(
+        name: cubit.tripModel!.pickUpPlace,
+        lat: cubit.tripModel!.pickUpLatitude,
+        lng: cubit.tripModel!.pickUpLongitude,
+        country: 'Egypt',
+      );
+      cubit.toPlace = PlaceModel(
+        name: cubit.tripModel!.dropOffPlace,
+        lat: 0,
+        lng: 0,
+        country: 'Egypt',
+      );
+    }
   }
 }

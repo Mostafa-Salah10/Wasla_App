@@ -14,8 +14,12 @@ class ResidentTripModel {
   final DateTime startRide;
   final DateTime endRide;
   final double price;
+  final double pickUpLatitude;
+  final double pickUpLongitude;
 
   ResidentTripModel({
+    required this.pickUpLatitude,
+    required this.pickUpLongitude,
     required this.driverName,
     required this.driverId,
     required this.yearsOfExperience,
@@ -50,8 +54,8 @@ class ResidentTripModel {
       startRide: DateTime.parse(json['startRide']),
       endRide: DateTime.parse(json['endRide']),
       price: (json['price'] as num).toDouble(),
+      pickUpLatitude:(json['pickUpLatitude'] as num).toDouble() ,
+      pickUpLongitude: (json['pickUpLongitude'] as num).toDouble(),
     );
   }
-
-
 }

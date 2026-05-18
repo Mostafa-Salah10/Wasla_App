@@ -36,7 +36,7 @@ class _HomeResidentNavbarState extends State<HomeResidentNavbar> {
   @override
   void initState() {
     super.initState();
-    // checkIsInRide();
+    checkIsInRide();
   }
 
   void checkIsInRide() async {

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
@@ -164,6 +163,8 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
       final response = await api.get(
         ApiEndPoints.getRideDetaislForResident + tripId.toString(),
       );
+
+      // log("$response");
       return Right(ResidentTripModel.fromJson(response[ApiKeys.data]));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.errorModel.errorMessage));
@@ -223,7 +224,7 @@ class ResidnetDriverRepoImpl extends ResidnetDriverRepo {
           ApiKeys.vehicleType: vehicleType,
         },
       );
-      log("Trip  Id : $response");
+      // log("Trip  Id : $response");
 
       return Right(response);
     } on ServerException catch (e) {
