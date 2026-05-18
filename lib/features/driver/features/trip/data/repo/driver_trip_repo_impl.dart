@@ -80,6 +80,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
   Future<Either<String, Null>> updateDriverLocation({
     required LatLng location,
     required String driverId,
+    required int vehicleType,
   }) async {
     try {
       await api.post(
@@ -88,9 +89,11 @@ class DriverTripRepoImpl extends DriverTripRepo {
           ApiKeys.driverId: driverId,
           ApiKeys.latitudeSmall: location.latitude,
           ApiKeys.longitudeSmall: location.longitude,
-          "vehicleType": 0,
+          "vehicleType": vehicleType,
         },
       );
+
+      // log("Success");
 
       return Right(null);
     } on ServerException catch (e) {

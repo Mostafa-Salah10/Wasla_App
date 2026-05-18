@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:wasla/core/enums/driver_enums.dart';
 import 'package:wasla/core/enums/driver_status.dart';
 import 'package:wasla/core/error/failure.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
@@ -33,6 +34,8 @@ class DriverTripCubit extends Cubit<DriverTripState> {
 
   bool isDriverArrived = false;
   bool isStartedTrip = false;
+
+  VehicleType vehicleType = VehicleType.car;
 
   int tripId = -1;
   int tripIdStored = -1;
@@ -248,6 +251,7 @@ class DriverTripCubit extends Cubit<DriverTripState> {
     final String? driverId = await getUserId();
     if (driverId == null) return;
     final result = await driverTripRepo.updateDriverLocation(
+      vehicleType: vehicleType.index,
       driverId: driverId,
       location: driverLocation!,
     );

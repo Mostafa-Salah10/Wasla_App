@@ -40,6 +40,7 @@ class _DriverDashboardViewState extends State<DriverDashboardView> {
   void getData() {
     final cubit = context.read<DriverCubit>();
     cubit.getDriverProfile();
+
     cubit.getDriverStatistics();
   }
 }

@@ -18,6 +18,7 @@ abstract class DriverTripRepo {
   Future<Either<String, Null>> updateDriverLocation({
     required LatLng location,
     required String driverId,
+    required int vehicleType,
   });
   Future<Either<String, Null>> updateDriverStatus({
     required DriverStatus status,
