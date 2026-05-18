@@ -1,5 +1,8 @@
 📱 Wasla Mobile App — Smart Community Platform
 
+🔗 Project Demo & Resources:
+[Google Drive Folder](https://drive.google.com/drive/folders/1ZkU4SY8poGlgf8811RzBZmJfW2tURuBl?utm_source=chatgpt.com)
+
 🚀 Mobile Application for the Wasla Smart Community Management System
 
 Wasla Mobile is the Flutter-based mobile application designed to provide residents, drivers, doctors, and service providers with a smooth and modern mobile experience for managing daily compound services and smart community interactions.
@@ -229,12 +232,19 @@ Local caching using Hive
 
 Developed as part of the Wasla Graduation Project.
 
-Mobile Team (Flutter)
+Mobile Team
 
-Backend Team (.NET)
+Flutter Development
 
-Frontend Team (React)
 
+Backend Team
+
+.NET Development
+
+
+Frontend Team
+
+React Development
 
 
 
