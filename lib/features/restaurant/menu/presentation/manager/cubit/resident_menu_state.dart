@@ -8,6 +8,7 @@ final class ResidentMenuInitial extends ResidentMenuState {}
 
 ////Update States
 final class ResidentMenuSelectCategory extends ResidentMenuState {}
+
 final class ResidentMenuToggleAvailability extends ResidentMenuState {}
 
 final class ResidentMenuUpdateMenuImage extends ResidentMenuState {}
@@ -18,6 +19,23 @@ final class ResidentMenuNetworkState extends ResidentMenuState {}
 final class ResidentMenuFailureState extends ResidentMenuState {}
 
 final class ResidentMenuOnRetryState extends ResidentMenuState {}
+
+//// change restaurant status
+final class ResidentChangeResStatusLoadingState extends ResidentMenuState {}
+
+final class ResidentChangeResStatusFailureState extends ResidentMenuState {
+  final String errorMsge;
+
+  ResidentChangeResStatusFailureState({required this.errorMsge});
+}
+
+final class ResidentChangeResStatusSucessState extends ResidentMenuState {}
+
+///get restaurant status
+
+final class ResidentGetResStatusLoadingState extends ResidentMenuState {}
+
+final class ResidentGetResStatusSucessState extends ResidentMenuState {}
 
 ////get menu categories
 

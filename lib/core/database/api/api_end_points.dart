@@ -156,6 +156,8 @@ abstract class ApiEndPoints {
       'api/RestaurantOrder/orders-restaurant';
   static const String getRestaurantChart = 'api/Restaurant/Charts';
   static const String getRestaurantMenu = '/api/RestaurantMenu/Items';
+  static const String changeRestaurantStatus = 'api/Restaurant/ChangeStatus';
+  static const String getRestaurantStatus = 'api/Restaurant/Status';
   static const String addMenuToCart = 'api/RestaurantOrder/add-to-cart';
   static const String getResidentCartWithRestaurant =
       'api/RestaurantOrder/cart-items';

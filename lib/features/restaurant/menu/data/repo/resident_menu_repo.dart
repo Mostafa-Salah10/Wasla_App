@@ -13,6 +13,10 @@ abstract class ResidentMenuRepo {
   Future<Either<Failure, List<RestauarantMenuItemModel>>> getMenuItems({
     required String restaurantId,
   });
+  Future<Either<String, Null>> changeRestaurantStatus();
+  Future<Either<String, bool>> getRestaurantStatus({
+    required String restaurantId,
+  });
   Future<Either<Failure, List<RestaurantMenuModel>>> getRestaurantMenu({
     required String restaurantId,
     required int pageNumber,

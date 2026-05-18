@@ -26,6 +26,8 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   int preparationTime = 0;
   bool menuIsAvailable = true;
 
+  bool restaurantStatus = true;
+
   void changeMenuAvailability({required bool menuIsAvailable}) {
     this.menuIsAvailable = menuIsAvailable;
     emit(ResidentMenuToggleAvailability());
@@ -35,6 +37,41 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
 
   void onRetry() {
     emit(ResidentMenuOnRetryState());
+  }
+
+  Future<void> getRestaurantStatus() async {
+    emit(ResidentGetResStatusLoadingState());
+    final String? restauantId = await getUserId();
+
+    final result = await menu.getRestaurantStatus(restaurantId: restauantId!);
+
+    result.fold(
+      (failure) {
+        emit(ResidentMenuFailureState());
+      },
+      (sucess) {
+        restaurantStatus = sucess;
+        emit(ResidentGetResStatusSucessState());
+      },
+    );
+  }
+
+  Future<void> changeRestauantStatus() async {
+    restaurantStatus = !restaurantStatus;
+    emit(ResidentChangeResStatusLoadingState());
+
+    final result = await menu.changeRestaurantStatus();
+
+    result.fold(
+      (failure) {
+        restaurantStatus = !restaurantStatus;
+
+        emit(ResidentChangeResStatusFailureState(errorMsge: failure));
+      },
+      (sucess) {
+        emit(ResidentChangeResStatusSucessState());
+      },
+    );
   }
 
   void updateMenuImage({required File image}) {

@@ -587,7 +587,9 @@
               "contact": "التواصل",
               "basicInfo": "معلومات اساسية",
                 "orderCancelled": "تم الغاء الطلب",
-                      "availablity": "الاتاحة"
+                      "availablity": "الاتاحة",
+                            "recieve_orders": "تقبل الطلبات"
+
 
 
 

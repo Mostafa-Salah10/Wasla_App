@@ -219,4 +219,35 @@ class ResidentMenuRepoImpl extends ResidentMenuRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<String, Null>> changeRestaurantStatus() async {
+    try {
+      await api.put(ApiEndPoints.changeRestaurantStatus);
+      return Right(null);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, bool>> getRestaurantStatus({
+    required String restaurantId,
+  }) async {
+    try {
+      final response = await api.get(
+        ApiEndPoints.getRestaurantStatus,
+        queryParameters: {ApiKeys.userId: restaurantId},
+      );
+
+      // log('$response');
+      return Right(response[ApiKeys.data]['status']);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

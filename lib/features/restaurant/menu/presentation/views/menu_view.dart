@@ -87,6 +87,7 @@ class _MenuViewState extends State<MenuView> {
   void getMenu() async {
     final cubit = context.read<ResidentMenuCubit>();
     final String? restaurantId = await getUserId();
+    await cubit.getRestaurantStatus();
     cubit.getMenuCategories(restaurantId: restaurantId!);
     cubit.getMenuItems(restaurantId: restaurantId, categoryId: 0);
   }

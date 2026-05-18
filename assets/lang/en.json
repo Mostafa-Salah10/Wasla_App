@@ -130,6 +130,7 @@
       "disabled_desc": "This account is no longer active.",
       "disabled_title": "Account Disabled",
       "availablity": "Availablity",
+      "recieve_orders": "Recieve Orders",
       "cancel": "Cancel",
       "logout_desc": "Are you sure you want to logout?",
       "yes_logout": "Yes, Logout",
