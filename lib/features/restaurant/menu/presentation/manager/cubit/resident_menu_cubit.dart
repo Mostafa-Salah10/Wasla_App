@@ -24,6 +24,12 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   String menuNameAr = '', menuNameEn = '';
   double discount = 0, price = 0;
   int preparationTime = 0;
+  bool menuIsAvailable = true;
+
+  void changeMenuAvailability({required bool menuIsAvailable}) {
+    this.menuIsAvailable = menuIsAvailable;
+    emit(ResidentMenuToggleAvailability());
+  }
 
   final addMenuFormKey = GlobalKey<FormState>();
 
@@ -126,6 +132,7 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
   Future<void> updateMenu({required MenuItem menuItem}) async {
     emit(ResidentAddOrUpdateMenuItemLoadingState());
     final result = await menu.updateMenu(
+      isAvailable: menuIsAvailable,
       id: menuItem.id,
       nameAr: menuNameAr.isEmpty ? menuItem.name : menuNameAr,
       nameEn: menuNameEn.isEmpty ? menuItem.name : menuNameEn,

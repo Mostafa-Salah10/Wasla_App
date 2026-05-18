@@ -41,3 +41,29 @@ class ProfileItem extends StatelessWidget {
     );
   }
 }
+
+class CustomSwitchButtonWithTitle extends StatelessWidget {
+  const CustomSwitchButtonWithTitle({
+    super.key,
+    required this.title,
+    required this.trailing,
+  });
+  final Widget trailing;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
+        ),
+        trailing,
+      ],
+    );
+  }
+}

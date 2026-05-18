@@ -36,6 +36,7 @@ abstract class ResidentMenuRepo {
     required double discount,
     required int preparationTime,
     required int categoryId,
+    required bool isAvailable,
     File? image,
   });
 

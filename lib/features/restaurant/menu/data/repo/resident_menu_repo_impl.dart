@@ -118,6 +118,8 @@ class ResidentMenuRepoImpl extends ResidentMenuRepo {
     required double discount,
     required int preparationTime,
     required int categoryId,
+    required bool isAvailable,
+
     File? image,
   }) async {
     try {
@@ -134,6 +136,7 @@ class ResidentMenuRepoImpl extends ResidentMenuRepo {
           'preparationTime': preparationTime,
           'id': id,
           'categoryId': categoryId,
+          'isAvailable': isAvailable,
         },
         body: formData,
         headers: {'Content-Type': 'multipart/form-data'},

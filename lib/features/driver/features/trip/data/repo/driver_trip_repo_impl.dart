@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wasla/core/connection/network_info.dart';
@@ -90,6 +91,7 @@ class DriverTripRepoImpl extends DriverTripRepo {
           "vehicleType": 0,
         },
       );
+
       return Right(null);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);

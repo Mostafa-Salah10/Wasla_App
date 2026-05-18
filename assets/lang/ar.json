@@ -27,6 +27,7 @@
       "dontHaveAccount": "ليس لديك حساب؟",
       "createAccount": "أنشئ حسابك",
       "orContinueWith": "أو تابع باستخدام",
+
       "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
         "noBack":"لا، رجوع",
 
@@ -585,7 +586,9 @@
         "viewCV": "عرض السيرة الذاتية",
               "contact": "التواصل",
               "basicInfo": "معلومات اساسية",
-                "orderCancelled": "تم الغاء الطلب"
+                "orderCancelled": "تم الغاء الطلب",
+                      "availablity": "الاتاحة"
+
 
 
 

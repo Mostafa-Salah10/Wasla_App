@@ -8,16 +8,20 @@ class CustomSwitchButton extends StatelessWidget {
     super.key,
     required this.onChanged,
     required this.value,
+    this.withouteTransilate,
   });
   final void Function(bool)? onChanged;
   final bool value;
+  final bool? withouteTransilate;
 
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
       scale: 0.8,
       child: Transform.translate(
-        offset: context.isArabic ? Offset(-10, 0) : Offset(20, 0),
+        offset: context.isArabic
+            ? Offset(withouteTransilate == true ? 0 : -10, 0)
+            : Offset(withouteTransilate == true ? 0 : 20, 0),
         child: CupertinoSwitch(
           inactiveThumbColor: AppColors.whiteColor,
           inactiveTrackColor: AppColors.grayDark.withOpacity(0.2),

@@ -8,6 +8,7 @@ final class ResidentMenuInitial extends ResidentMenuState {}
 
 ////Update States
 final class ResidentMenuSelectCategory extends ResidentMenuState {}
+final class ResidentMenuToggleAvailability extends ResidentMenuState {}
 
 final class ResidentMenuUpdateMenuImage extends ResidentMenuState {}
 
