@@ -23,7 +23,10 @@ class _ResidentMenuViewState extends State<ResidentMenuView> {
   @override
   void initState() {
     menuHub = MenuHub(
-      onMenuItemStatusChanged: (menuId, availabiltiy) {},
+      onMenuItemStatusChanged: (menuId, availabiltiy) {
+        final cubit = context.read<ResidentMenuCubit>();
+        cubit.onMenuStatusChanged(menuId: menuId, menuIsAvailable: availabiltiy);
+      },
       onMenuItemDeleted: (menuId) {
         final cubit = context.read<ResidentMenuCubit>();
         cubit.onMenuDeleted(menuId: menuId);

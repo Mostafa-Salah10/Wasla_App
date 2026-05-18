@@ -13,6 +13,12 @@ final class ResidentMenuToggleAvailability extends ResidentMenuState {}
 
 final class ResidentMenuUpdateMenuImage extends ResidentMenuState {}
 
+final class ResidentUpdateMenuStatus extends ResidentMenuState {
+  final int menuId;
+
+  ResidentUpdateMenuStatus({required this.menuId});
+}
+
 ///Basics State
 final class ResidentMenuNetworkState extends ResidentMenuState {}
 

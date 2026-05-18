@@ -39,6 +39,28 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
     emit(ResidentMenuOnRetryState());
   }
 
+  Future<void> onMenuStatusChanged({
+    required int menuId,
+    required bool menuIsAvailable,
+  }) async {
+    bool flag = false;
+    for (var category in allCategoriesItems) {
+      for (var item in category.items) {
+        if (item.id == menuId) {
+          item.isAvailable = menuIsAvailable;
+          flag = true;
+          break;
+        }
+      }
+      if (flag) {
+        break;
+      }
+    }
+    if (flag) {
+      emit(ResidentUpdateMenuStatus(menuId: menuId));
+    }
+  }
+
   Future<void> onMenuDeleted({required int menuId}) async {
     int itemCategory = 0;
     for (var category in allCategoriesItems) {

@@ -27,7 +27,7 @@ class MenuItem {
   final double discountPrice;
   final String imageUrl;
   final int preparationTime;
-  final bool isAvailable;
+   bool isAvailable;
 
   MenuItem({
     required this.id,

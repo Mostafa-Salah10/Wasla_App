@@ -93,7 +93,7 @@ class AuthRepoImpl extends AuthRepo {
         body: {
           ApiKeys.email: email,
           ApiKeys.newPassword: newPassword,
-          ApiKeys.otp: otp,
+          // ApiKeys.otp: otp,
         },
       );
       return Right(null);
