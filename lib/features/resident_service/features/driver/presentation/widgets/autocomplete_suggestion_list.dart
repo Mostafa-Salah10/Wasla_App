@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/features/resident_service/features/driver/presentation/manager/cubit/resident_driver_cubit.dart';
 
 class AutocompleteSuggestionList extends StatelessWidget {
@@ -41,7 +42,7 @@ class AutocompleteSuggestionList extends StatelessWidget {
                   child: Icon(
                     Icons.location_on_outlined,
                     size: 23,
-                    color: Colors.black,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
                 Expanded(

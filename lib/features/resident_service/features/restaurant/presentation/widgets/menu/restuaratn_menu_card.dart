@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/utils/app_colors.dart';
@@ -46,12 +47,19 @@ class RestaurantMenuItemCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.isDarkMode ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.grey.shade200, width: 0.8),
+          border: Border.all(
+            color: context.isDarkMode
+                ? Colors.grey.shade800
+                : Colors.grey.shade200,
+            width: 0.8,
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: context.isDarkMode
+                  ? Colors.black
+                  : Colors.black.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -131,11 +139,7 @@ class RestaurantMenuItemCard extends StatelessWidget {
                     item.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF2C2C2A),
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall
                   ),
                   const SizedBox(height: 6),
                   Row(

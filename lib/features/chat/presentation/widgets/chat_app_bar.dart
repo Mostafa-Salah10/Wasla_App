@@ -32,7 +32,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: AppBar(
             toolbarHeight: 75,
             titleSpacing: 0,
-            backgroundColor: !context.isDarkMode ? Colors.white : Colors.black,
+            // backgroundColor: !context.isDarkMode ? Colors.white : Colors.black,
             scrolledUnderElevation: 0,
             title: Row(
               spacing: 10,

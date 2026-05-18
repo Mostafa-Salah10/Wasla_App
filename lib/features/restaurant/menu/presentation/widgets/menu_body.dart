@@ -16,7 +16,6 @@ class MenuBody extends StatelessWidget {
           SizedBox(height: AppSizes.paddingSizeSmall),
           const ResidnetRestaurantMenuCategory(),
           SizedBox(height: AppSizes.paddingSizeDefault),
-
           const RestauantStatusWidget(),
           SizedBox(height: AppSizes.paddingSizeDefault),
           Expanded(child: RestaurantMenuCatgoryList(showOrderButton: false)),
