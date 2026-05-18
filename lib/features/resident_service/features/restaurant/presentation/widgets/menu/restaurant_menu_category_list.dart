@@ -70,21 +70,12 @@ class _RestaurantMenuCatgoryListState extends State<RestaurantMenuCatgoryList> {
             childAspectRatio: widget.showOrderButton ? 0.70 : 0.78,
           ),
           itemCount: items.length,
-          itemBuilder: (context, index) =>
-              BlocBuilder<ResidentMenuCubit, ResidentMenuState>(
-                buildWhen: (previous, current) =>
-                    current is ResidentUpdateMenuStatus &&
-                    items.elementAt(index).id == current.menuId,
-                builder: (context, state) {
-                  return RestaurantMenuItemCard(
-                    restaurantId: widget.restaurantId,
-                    item: items.elementAt(index),
-                    showOrderButton:
-                        widget.showOrderButton &&
-                        items.elementAt(index).isAvailable,
-                  );
-                },
-              ),
+          itemBuilder: (context, index) => RestaurantMenuItemCard(
+            restaurantId: widget.restaurantId,
+            item: items.elementAt(index),
+            showOrderButton:
+                widget.showOrderButton && items.elementAt(index).isAvailable,
+          ),
         );
       },
     );

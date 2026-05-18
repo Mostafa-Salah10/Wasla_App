@@ -16,8 +16,10 @@ class RealTimeMsgModel {
   final bool isSent;
   final bool isEdited;
   final List<String> files;
+  final String? localId;
 
   RealTimeMsgModel({
+    this.localId,
     this.nameSender,
     this.profileSender,
     required this.id,
@@ -55,6 +57,7 @@ class RealTimeMsgModel {
       readAt: map['readAt'] != null ? DateTime.parse(map['readAt']) : null,
       isSent: map['isSent'],
       isEdited: map['isEdited'],
+      localId: map['localId'],
       files: List<String>.from(map['files'] ?? []),
     );
   }

@@ -49,12 +49,7 @@ class MenuHub {
 
   Future<void> joinRestaurantGroup(String restaurantId) async {
     try {
-      await hubConnection.invoke(
-        'JoinRestaurantGroup',
-        args: ['restaurant_$restaurantId'],
-      );
-
-      log('Joined Group => restaurant_$restaurantId');
+      await hubConnection.invoke('JoinRestaurantGroup', args: [restaurantId]);
     } catch (e) {
       log('Join Group Error: $e');
     }
@@ -64,32 +59,27 @@ class MenuHub {
     /// Menu Item Status Changed
     hubConnection.on('MenuItemStatusChanged', (args) {
       log('Status Changed Fired');
-
-      log('RAW DATA => ${args.toString()}');
-
       if (args != null && args.isNotEmpty) {
-        final data = Map<String, dynamic>.from(args[0] as Map);
+        // final data = args[0] as Map;
 
-        final int menuItemId = data['menuItemId'];
-        final bool isAvailable = data['isAvailable'];
+        // final int menuItemId = data['menuItemId'];
+        // final bool isAvailable = data['isAvailable'];
 
-        log(
-          'MenuItemStatusChanged => '
-          'ID: $menuItemId | '
-          'Available: $isAvailable',
-        );
+        // log(
+        //   'MenuItemStatusChanged => '
+        //   'ID: $menuItemId | Available: $isAvailable',
+        // );
 
-        onMenuItemStatusChanged?.call(menuItemId, isAvailable);
+        // onMenuItemStatusChanged?.call(menuItemId, isAvailable);
       }
     });
 
     /// Menu Item Deleted
     hubConnection.on('MenuItemDeleted', (args) {
       if (args != null && args.isNotEmpty) {
-        final data = Map<String, dynamic>.from(args[0] as Map);
+        final data = args[0] as Map;
 
         final int menuItemId = data['menuItemId'];
-
         onMenuItemDeleted?.call(menuItemId);
       }
     });

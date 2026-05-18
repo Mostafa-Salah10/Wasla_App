@@ -79,6 +79,7 @@ class ChatHub {
     hubConnection.on("ReceiveMessage", (data) {
       final message = data![0] as Map<String, dynamic>;
       log("Disha new message");
+      // log(message.toString());
 
       chat.handleWhenNewMsg(user: RealTimeMsgModel.fromJson(message));
     });

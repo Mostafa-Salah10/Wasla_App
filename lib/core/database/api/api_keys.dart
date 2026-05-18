@@ -11,6 +11,7 @@ abstract class ApiKeys {
   static const lan = 'lan';
   static const documents = 'Documents';
   static const otp = 'otp';
+  static const localId = 'LocalId';
   static const restaurantId = 'restaurantId';
   static const orderId = 'orderId';
   static const verificationType = 'verificationType';

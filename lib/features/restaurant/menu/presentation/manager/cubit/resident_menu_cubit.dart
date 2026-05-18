@@ -71,6 +71,9 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
     }
     if (currentCategoryId == itemCategory) {
       filterItemsByCategory(categoryId: itemCategory);
+      return;
+    } else if (currentCategoryId == 0) {
+      filterItemsByCategory(categoryId: currentCategoryId);
     }
   }
 

@@ -55,6 +55,8 @@ class ChatRepoImpl extends ChatRepo {
           ApiKeys.senderId: senderId,
           ApiKeys.receiverIdSend: receiverId,
           ApiKeys.type: type,
+          ApiKeys.localId: 'test',
+
           if (messageText != null) ApiKeys.messageText: messageText,
         },
         body: formData,
