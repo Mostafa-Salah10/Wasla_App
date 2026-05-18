@@ -62,7 +62,10 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
     }, (categories) => emit(ResidentGetMenuCateroriesLoadedState(categories)));
   }
 
-  Future<void> getMenuItems({required String restaurantId}) async {
+  Future<void> getMenuItems({
+    required String restaurantId,
+    required int categoryId,
+  }) async {
     allCategoriesItems.clear();
     emit(ResidentGetMenuCategoryItemsLoadingState());
     final result = await menu.getMenuItems(restaurantId: restaurantId);
@@ -77,7 +80,7 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
       (items) {
         allCategoriesItems = items;
 
-        filterItemsByCategory(categoryId: 0);
+        filterItemsByCategory(categoryId: categoryId);
       },
     );
   }
@@ -122,7 +125,10 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
       },
       (success) async {
         final String? restaurantId = await getUserId();
-        await getMenuItems(restaurantId: restaurantId!);
+        await getMenuItems(
+          restaurantId: restaurantId!,
+          categoryId: currentCategoryId,
+        );
         emit(ResidentAddOrUpdateMenuItemSuccessState());
         reset();
       },
@@ -150,7 +156,10 @@ class ResidentMenuCubit extends Cubit<ResidentMenuState> {
       },
       (success) async {
         final String? restaurantId = await getUserId();
-        await getMenuItems(restaurantId: restaurantId!);
+        await getMenuItems(
+          restaurantId: restaurantId!,
+          categoryId: currentCategoryId,
+        );
         emit(ResidentAddOrUpdateMenuItemSuccessState());
         reset();
       },

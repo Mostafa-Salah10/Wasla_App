@@ -3,7 +3,7 @@ import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/auth/data/models/drop_down_menu_item.dart';
 
-class CustomDropDownMenu extends StatelessWidget {
+class CustomDropDownMenu extends StatefulWidget {
   const CustomDropDownMenu({
     super.key,
     required this.items,
@@ -18,16 +18,55 @@ class CustomDropDownMenu extends StatelessWidget {
   final void Function(String?)? onSelecte;
 
   @override
+  State<CustomDropDownMenu> createState() => _CustomDropDownMenuState();
+}
+
+class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(
+      text: _getLabelByValue(widget.initialSelection),
+    );
+  }
+
+  @override
+  void didUpdateWidget(CustomDropDownMenu oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialSelection != widget.initialSelection ||
+        oldWidget.items != widget.items) {
+      _controller.text = _getLabelByValue(widget.initialSelection);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String _getLabelByValue(String? value) {
+    return widget.items
+            .where((item) => item.value == value)
+            .firstOrNull
+            ?.label ??
+        '';
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DropdownMenu<String>(
       width: double.infinity,
-      onSelected: onSelecte,
-      hintText: hint,
-      initialSelection: initialSelection,
+      controller: _controller,
+      onSelected: widget.onSelecte,
+      hintText: widget.hint,
+      initialSelection: widget.initialSelection,
       textStyle: Theme.of(context).textTheme.headlineMedium,
       inputDecorationTheme: _buildInputDecoration(context),
       menuStyle: _buildMenuStyle(context),
-      dropdownMenuEntries: items.map((item) {
+      dropdownMenuEntries: widget.items.map((item) {
         return _buildItems(item, context);
       }).toList(),
     );

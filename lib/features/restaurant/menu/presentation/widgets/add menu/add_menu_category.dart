@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/functions/get_user_id.dart';
@@ -9,7 +10,7 @@ import 'package:wasla/features/restaurant/menu/presentation/manager/cubit/reside
 class AddMenuCategory extends StatefulWidget {
   const AddMenuCategory({super.key, this.categoryId, this.menuId});
   final int? categoryId;
-  final int ? menuId;
+  final int? menuId;
   @override
   State<AddMenuCategory> createState() => _AddMenuCategoryState();
 }
@@ -36,6 +37,7 @@ class _AddMenuCategoryState extends State<AddMenuCategory> {
           }
           if (widget.categoryId != null) {
             if (widget.categoryId == 0) {
+              //all
               cubit.addMenuCategoryId = cubit.getCategoryIdByItem(
                 menuId: widget.menuId!,
               );
@@ -44,6 +46,7 @@ class _AddMenuCategoryState extends State<AddMenuCategory> {
             }
           }
         }
+
         return CustomDropDownMenu(
           initialSelection: widget.categoryId != null
               ? cubit.addMenuCategoryId.toString()
