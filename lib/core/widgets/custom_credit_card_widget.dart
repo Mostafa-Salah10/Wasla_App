@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/enums/payment_method.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 
@@ -26,7 +27,9 @@ class CustomCreditCard extends StatelessWidget {
       width: double.infinity,
       height: SizeConfig.blockHeight * 10,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 236, 234, 234),
+        color: context.isDarkMode
+            ? Colors.black
+            : const Color.fromARGB(255, 236, 234, 234),
         borderRadius: BorderRadius.circular(7),
         border: Border.all(width: 0.1),
       ),

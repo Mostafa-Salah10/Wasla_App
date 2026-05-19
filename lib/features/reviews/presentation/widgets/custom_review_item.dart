@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wasla/core/functions/format_date_from_string.dart';
+import 'package:wasla/core/widgets/custom_directional_text_widet.dart';
 import 'package:wasla/features/reviews/data/models/review_model.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/core/widgets/readmore_text.dart';
@@ -41,10 +42,10 @@ class CustomReviewItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 5,
       children: [
-        Text(
+        CustomTextWidget(
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          reviewModel.reviewerName,
+          text: reviewModel.reviewerName,
           style: Theme.of(
             context,
           ).textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),

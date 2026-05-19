@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
 import 'package:wasla/features/gym/features/packages/data/models/gym_package_model.dart';
@@ -14,7 +15,7 @@ class GymPackageItem extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: const Color(0xFFE0E0E0),
+        color: context.isDarkMode ? Colors.black : const Color(0xFFE0E0E0),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Stack(

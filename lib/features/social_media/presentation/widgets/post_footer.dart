@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/config/routes/app_routes.dart';
 import 'package:wasla/core/enums/social_enums.dart';
+import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/core/extensions/custom_navigator_extension.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/utils/assets.dart';
@@ -38,7 +39,11 @@ class PostFooter extends StatelessWidget {
                     ? Assets.assetsImagesFavourite
                     : Assets.assetsImagesHeartOutline,
                 height: 20,
-                color: post.isLoved ? AppColors.primaryColor : null,
+                color: post.isLoved
+                    ? AppColors.primaryColor
+                    : context.isDarkMode
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
             const SizedBox(width: 10),
@@ -60,7 +65,11 @@ class PostFooter extends StatelessWidget {
                   builder: (context) => CommentBottomSheet(postId: post.postId),
                 );
               },
-              child: Image.asset(Assets.assetsImagesComment, height: 20),
+              child: Image.asset(
+                Assets.assetsImagesComment,
+                height: 20,
+                color: context.isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
             const SizedBox(width: 8),
             _buildTextNumber(context, num: post.numberofComments),
@@ -79,7 +88,11 @@ class PostFooter extends StatelessWidget {
                     ? Assets.assetsImagesSaveFilled
                     : Assets.assetsImagesSaveOutlined,
                 height: 20,
-                color: post.isSaved ? AppColors.primaryColor : null,
+                color: post.isSaved
+                    ? AppColors.primaryColor
+                    : context.isDarkMode
+                    ? Colors.white
+                    : Colors.black,
               ),
             ),
             const SizedBox(width: 8),

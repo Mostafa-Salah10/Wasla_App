@@ -66,7 +66,9 @@ class OrderHeader extends StatelessWidget {
                   );
                 },
                 child: Transform.translate(
-                  offset: const Offset(12, 0),
+                  offset: context.isArabic
+                      ? const Offset(-12, 0)
+                      : const Offset(12, 0),
                   child: Icon(
                     Icons.keyboard_arrow_down_rounded,
                     size: 30,

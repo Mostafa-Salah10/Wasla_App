@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/utils/assets.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 
@@ -12,7 +13,7 @@ class CustomNotFoundWidget extends StatelessWidget {
         children: [
           Image.asset(Assets.assetsImagesNoFound, width: 300, height: 300),
           Text(
-            "Not Found",
+            "notFound".tr(context),
             style: Theme.of(context).textTheme.labelMedium!.copyWith(
               fontSize: SizeConfig.textSize * 3,
             ),
@@ -20,7 +21,7 @@ class CustomNotFoundWidget extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             textAlign: TextAlign.center,
-            "Sorry, the keyword you entered can not be found,please check again or search with another keyword",
+            "sorrySearch".tr(context),
             style: Theme.of(
               context,
             ).textTheme.labelSmall!.copyWith(fontSize: SizeConfig.textSize * 2),

@@ -7,21 +7,34 @@ import 'package:wasla/core/utils/app_colors.dart';
 class ReadmoreText extends StatelessWidget {
   final String text;
   final int? maxLines;
+
   const ReadmoreText({super.key, required this.text, this.maxLines});
+
+  TextDirection _getDirection(String text) {
+    final arabicRegex = RegExp(r'[\u0600-\u06FF]');
+    return arabicRegex.hasMatch(text) ? TextDirection.rtl : TextDirection.ltr;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ReadMoreText(
-      text,
-      trimLines: maxLines ?? 2,
-      trimMode: TrimMode.Line,
-      trimCollapsedText: "viewMore".tr(context),
-      trimExpandedText: "showLess".tr(context),
-      moreStyle: TextStyle(color: AppColors.primaryColor),
-      lessStyle: TextStyle(color: AppColors.primaryColor),
-      style: TextStyle(
-        color: AppColors.gray,
-        fontSize: getResponsiveFontSize(context, fontSize: 16),
+    return Directionality(
+      textDirection: _getDirection(text),
+      child: ReadMoreText(
+        text,
+        trimLines: maxLines ?? 2,
+        trimMode: TrimMode.Line,
+
+        trimCollapsedText: "viewMore".tr(context),
+        trimExpandedText: "showLess".tr(context),
+
+        moreStyle: TextStyle(color: AppColors.primaryColor),
+
+        lessStyle: TextStyle(color: AppColors.primaryColor),
+
+        style: TextStyle(
+          color: AppColors.gray,
+          fontSize: getResponsiveFontSize(context, fontSize: 16),
+        ),
       ),
     );
   }

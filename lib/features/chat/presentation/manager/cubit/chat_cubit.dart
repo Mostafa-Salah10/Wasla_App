@@ -93,13 +93,13 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   void whenUserTyping() async {
-    if (messageController.text.isEmpty && images.isEmpty) {
+    if (messageController.text.characters.isEmpty && images.isEmpty) {
       isSend = false;
       emit(ChatWhenUserTyping());
-    } else if (messageController.text.length == 1) {
+    } else if (messageController.text.characters.length == 1) {
       isSend = true;
       emit(ChatWhenUserTyping());
-    } else if (messageController.text.isEmpty && images.isNotEmpty) {
+    } else if (messageController.text.characters.isEmpty && images.isNotEmpty) {
       isSend = true;
       emit(ChatWhenUserTyping());
     }

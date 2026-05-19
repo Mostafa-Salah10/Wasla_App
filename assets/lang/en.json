@@ -131,6 +131,8 @@
       "disabled_title": "Account Disabled",
       "availablity": "Availablity",
       "recieve_orders": "Recieve Orders",
+      "notFound": "Not Found",
+      "sorrySearch": "Sorry, the keyword you entered can not be found,please check again or search with another keyword",
       "cancel": "Cancel",
       "logout_desc": "Are you sure you want to logout?",
       "yes_logout": "Yes, Logout",

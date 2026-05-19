@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wasla/core/config/localization/app_localizations.dart';
 import 'package:wasla/core/extensions/config_extension.dart';
 import 'package:wasla/features/resident_service/features/home/data/models/category_service_model.dart';
 
@@ -20,7 +21,7 @@ class CustomServiceCategoryItem extends StatelessWidget {
           textAlign: TextAlign.center,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          service.name,
+          service.name.tr(context),
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
             color: context.isDarkMode ? Colors.white : Colors.black,
           ),

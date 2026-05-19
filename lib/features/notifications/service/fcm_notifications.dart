@@ -167,6 +167,7 @@ class FcmNotifications {
         int.parse(message.data['type']),
       );
       navigateToRightRoute(
+        
         route: route,
         referenceId: message.data['refrenceId'],
       );
