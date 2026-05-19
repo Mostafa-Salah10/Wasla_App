@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wasla/core/functions/format_date_from_string.dart';
 import 'package:wasla/core/utils/app_colors.dart';
+import 'package:wasla/core/widgets/custom_directional_text_widet.dart';
 import 'package:wasla/features/chat/data/models/chats_msg_model.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 
@@ -15,8 +16,8 @@ class ChatMsgTextWiget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Text(
-            message.messageText ?? '',
+          child: CustomTextWidget(
+            text: message.messageText ?? '',
             style: Theme.of(context).textTheme.displaySmall!.copyWith(
               color: isMe ? AppColors.whiteColor : AppColors.blackColor,
             ),

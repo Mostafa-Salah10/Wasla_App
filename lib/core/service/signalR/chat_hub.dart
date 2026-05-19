@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 import 'package:wasla/core/database/api/api_keys.dart';
-import 'package:wasla/core/functions/toast_alert.dart';
 import 'package:wasla/core/service/service_locator.dart';
-import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/features/chat/data/models/real_time_msg_model.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 import '../../database/cache/secure_storage_helper.dart';
@@ -32,7 +30,8 @@ class ChatHub {
     try {
       await hubConnection.start();
     } catch (e) {
-      toastAlert(color: AppColors.red, msg: e.toString());
+      // toastAlert(color: AppColors.red, msg: e.toString());
+      log('Disha SignalR Connection Error: ${e.toString()}');
     }
   }
 

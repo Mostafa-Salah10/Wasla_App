@@ -4,6 +4,7 @@ import 'package:wasla/core/functions/format_date_from_string.dart';
 import 'package:wasla/core/responsive/size_config.dart';
 import 'package:wasla/core/utils/app_colors.dart';
 import 'package:wasla/core/widgets/cached_network_image_widget.dart';
+import 'package:wasla/core/widgets/custom_directional_text_widet.dart';
 import 'package:wasla/features/chat/data/models/chats_msg_model.dart';
 import 'package:wasla/features/chat/presentation/manager/cubit/chat_cubit.dart';
 
@@ -63,8 +64,8 @@ class ChatMsgImageWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text(
-                  message.messageText ?? '',
+                child: CustomTextWidget(
+                  text: message.messageText ?? '',
                   style: Theme.of(context).textTheme.displaySmall!.copyWith(
                     color: isMe ? AppColors.whiteColor : AppColors.blackColor,
                   ),
