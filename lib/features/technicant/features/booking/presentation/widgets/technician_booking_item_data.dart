@@ -68,9 +68,8 @@ class TechnicianBookingListItemData extends StatelessWidget {
           visible: technician.status == TechnicianBookingStatus.pending,
           child: BlocListener<TechnicianBookingCubit, TechnicianBookingState>(
             listenWhen: (previous, current) =>
-                current is TechincainAcceptBookingSuccessState ||
-                current is TechincainAcceptBookingFailureState &&
-                    current.bookingId == technician.bookingId,
+                current is TechnicianBookingActionState &&
+                current.bookingId == technician.bookingId,
             listener: (context, state) {
               if (state is TechincainAcceptBookingSuccessState) {
                 showToast(
@@ -110,7 +109,7 @@ class TechnicianBookingListItemData extends StatelessWidget {
               Text(
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                formatDateBooking(technician.bookingDate),
+                "${formatDateBooking(technician.bookingDate)} | ${formatDateTimeWithIntl(technician.bookingDate)}",
                 style: Theme.of(
                   context,
                 ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
@@ -118,7 +117,7 @@ class TechnicianBookingListItemData extends StatelessWidget {
               Text(
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                formatDateTimeWithIntl(technician.bookingDate),
+                "${'price'.tr(context)} : ${technician.price} ${"egb".tr(context)}",
                 style: Theme.of(
                   context,
                 ).textTheme.labelSmall!.copyWith(color: AppColors.gray),
@@ -132,9 +131,8 @@ class TechnicianBookingListItemData extends StatelessWidget {
               technician.status == TechnicianBookingStatus.accepted,
           child: BlocListener<TechnicianBookingCubit, TechnicianBookingState>(
             listenWhen: (previous, current) =>
-                current is TechincainCancelBookingSuccessState ||
-                current is TechincainCancelBookingFailureState &&
-                    current.bookingId == technician.bookingId,
+                current is TechnicianBookingActionState &&
+                current.bookingId == technician.bookingId,
             listener: (context, state) {
               if (state is TechincainCancelBookingSuccessState) {
                 showToast(
@@ -162,5 +160,4 @@ class TechnicianBookingListItemData extends StatelessWidget {
       ],
     );
   }
-
 }

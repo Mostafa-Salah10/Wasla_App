@@ -18,6 +18,7 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
     final double space = SizeConfig.isTablet ? 20.0 : 14.0;
     final double vSpace = SizeConfig.isTablet ? 25.0 : 15.0;
     context.read<ResidentTechnicianCubit>().reset();
+    final formKey = GlobalKey<FormState>();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: space),
@@ -49,17 +50,28 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
           ),
           SizedBox(height: vSpace),
 
-          CustomTextFormField(
-            keyboardTyp: TextInputType.number,
-            withTitle: true,
-            title: 'price'.tr(context),
-            hint: 'price'.tr(context),
-            withBorder: true,
-            onChanged: (value) {
-              context.read<ResidentTechnicianCubit>().price = double.parse(
-                value,
-              );
-            },
+          Form(
+            key: formKey,
+            child: CustomTextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'fieldRequired'.tr(context);
+                } else if (double.tryParse(value)! <= 0) {
+                  return 'invalidPrice'.tr(context);
+                }
+                return null;
+              },
+              keyboardTyp: TextInputType.number,
+              withTitle: true,
+              title: 'price'.tr(context),
+              hint: 'price'.tr(context),
+              withBorder: true,
+              onChanged: (value) {
+                context.read<ResidentTechnicianCubit>().price = double.parse(
+                  value,
+                );
+              },
+            ),
           ),
 
           const Spacer(),
@@ -74,9 +86,11 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
             builder: (context, state) {
               return GeneralButton(
                 onPressed: () {
-                  context.read<ResidentTechnicianCubit>().bookWithTechnician(
-                    technicianId: technicianId,
-                  );
+                  if (formKey.currentState!.validate()) {
+                    context.read<ResidentTechnicianCubit>().bookWithTechnician(
+                      technicianId: technicianId,
+                    );
+                  }
                 },
                 text: state is ResidentBookWithTechnicianLoading
                     ? 'loading'.tr(context)
@@ -84,7 +98,9 @@ class ResidentTechnicalBookViewBody extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: MediaQuery.of(context).padding.bottom>0?0:vSpace),
+          SizedBox(
+            height: MediaQuery.of(context).padding.bottom > 0 ? 0 : vSpace,
+          ),
         ],
       ),
     );

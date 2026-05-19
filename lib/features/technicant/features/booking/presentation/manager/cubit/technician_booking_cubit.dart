@@ -57,7 +57,7 @@ class TechnicianBookingCubit extends Cubit<TechnicianBookingState> {
   }
 
   Future<void> acceptBooking({required int bookingId}) async {
-    emit(TechincainAcceptBookingLoadingState());
+    emit(TechincainAcceptBookingLoadingState(bookingId: bookingId));
     final result = await technicianBookingsRepo.acceptBooking(
       bookingId: bookingId,
     );
@@ -80,7 +80,7 @@ class TechnicianBookingCubit extends Cubit<TechnicianBookingState> {
   }
 
   Future<void> acceptBookingFromDetailsScreen({required int bookingId}) async {
-    emit(TechincainAcceptBookingLoadingState());
+    emit(TechincainAcceptBookingLoadingState(bookingId: bookingId));
     final result = await technicianBookingsRepo.acceptBooking(
       bookingId: bookingId,
     );

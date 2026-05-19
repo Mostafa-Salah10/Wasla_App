@@ -28,40 +28,43 @@ class TechincainGetBookingDetailsLoadedState extends TechnicianBookingState {
   TechincainGetBookingDetailsLoadedState({required this.booking});
 }
 
-////AcceptBooking
-
-class TechincainAcceptBookingSuccessState extends TechnicianBookingState {
+abstract class TechnicianBookingActionState extends TechnicianBookingState {
   final int bookingId;
 
-  TechincainAcceptBookingSuccessState({required this.bookingId});
+  TechnicianBookingActionState({required this.bookingId});
 }
 
-class TechincainAcceptBookingFailureState extends TechnicianBookingState {
+////AcceptBooking
+
+class TechincainAcceptBookingSuccessState extends TechnicianBookingActionState {
+  TechincainAcceptBookingSuccessState({required super.bookingId});
+}
+
+class TechincainAcceptBookingFailureState extends TechnicianBookingActionState {
   final String errorMessage;
-  final int bookingId;
 
   TechincainAcceptBookingFailureState({
     required this.errorMessage,
-    required this.bookingId,
+    required super.bookingId,
   });
 }
 
-class TechincainAcceptBookingLoadingState extends TechnicianBookingState {}
+class TechincainAcceptBookingLoadingState extends TechnicianBookingActionState {
+  TechincainAcceptBookingLoadingState({required super.bookingId});
+}
 
 ////CancelBooking
 
-class TechincainCancelBookingSuccessState extends TechnicianBookingState {
-  final int bookingId;
+class TechincainCancelBookingSuccessState extends TechnicianBookingActionState {
 
-  TechincainCancelBookingSuccessState({required this.bookingId});
+  TechincainCancelBookingSuccessState({required super.bookingId});
 }
 
-class TechincainCancelBookingFailureState extends TechnicianBookingState {
-  final int bookingId;
+class TechincainCancelBookingFailureState extends TechnicianBookingActionState {
   final String errorMessage;
 
   TechincainCancelBookingFailureState({
-    required this.bookingId,
+    required super.bookingId,
     required this.errorMessage,
   });
 }
